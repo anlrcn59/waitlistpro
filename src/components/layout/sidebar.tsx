@@ -3,26 +3,30 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import type { Lang } from "@/lib/i18n";
 
-const NAV_ITEMS = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/waitlists", label: "Waitlists" },
-  { href: "/settings", label: "Settings" },
-  { href: "/settings/billing", label: "Billing" },
-] as const;
+type Props = { lang?: Lang };
 
-export function Sidebar() {
+export function Sidebar({ lang = "tr" }: Props) {
   const pathname = usePathname();
+  const base = `/${lang}`;
+
+  const navItems = [
+    { href: `${base}/dashboard`, label: lang === "en" ? "Dashboard" : "Dashboard" },
+    { href: `${base}/waitlists`, label: lang === "en" ? "Waitlists" : "Waitlist'ler" },
+    { href: `${base}/settings`, label: lang === "en" ? "Settings" : "Ayarlar" },
+    { href: `${base}/settings/billing`, label: lang === "en" ? "Billing" : "Ödeme" },
+  ];
 
   return (
     <aside className="flex w-56 flex-col border-r bg-zinc-50 dark:bg-zinc-950">
       <div className="flex h-14 items-center border-b px-6">
-        <Link href="/" className="font-semibold tracking-tight">
+        <Link href={base} className="font-semibold tracking-tight">
           WaitlistPro
         </Link>
       </div>
       <nav className="flex flex-1 flex-col gap-1 p-3">
-        {NAV_ITEMS.map((item) => (
+        {navItems.map((item) => (
           <Link
             key={item.href}
             href={item.href}

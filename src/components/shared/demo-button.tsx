@@ -2,8 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
+import type { Lang } from "@/lib/i18n";
 
-export function DemoButton() {
+type Props = {
+  label?: string;
+  lang?: Lang;
+};
+
+export function DemoButton({ label = "See demo", lang = "tr" }: Props) {
   const router = useRouter();
 
   async function handleClick() {
@@ -13,9 +19,9 @@ export function DemoButton() {
     } = await supabase.auth.getUser();
 
     if (user) {
-      router.push("/dashboard");
+      router.push(`/${lang}/dashboard`);
     } else {
-      router.push("/login");
+      router.push(`/${lang}/login`);
     }
   }
 
@@ -25,7 +31,7 @@ export function DemoButton() {
       onClick={handleClick}
       className="rounded-lg border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-50"
     >
-      See demo
+      {label}
     </button>
   );
 }
