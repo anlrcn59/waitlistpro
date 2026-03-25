@@ -186,4 +186,4 @@ export const tr = {
     empty_action: "İlk waitlist'ini oluştur",
     upgrade_success: "Ödemeniz alındı — Pro plana geçişiniz tamamlandı!",
   },
-} as const;
+};

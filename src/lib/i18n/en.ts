@@ -185,4 +185,4 @@ export const en = {
     empty_action: "Create your first waitlist",
     upgrade_success: "Payment received — you're now on the Pro plan!",
   },
-} as const;
+};

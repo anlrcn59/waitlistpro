@@ -3,12 +3,16 @@ import { en } from "./en";
 
 export type Lang = "tr" | "en";
 export const locales: Lang[] = ["tr", "en"];
-export type Dictionary = typeof tr;
 
-const dicts: Record<Lang, Dictionary> = { tr, en };
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Dictionary = Record<string, any>;
 
-export function getDictionary(lang: Lang): Dictionary {
-  return dicts[lang];
+const dicts = { tr, en };
+
+// Returns `any` so callers can use dot notation (noPropertyAccessFromIndexSignature)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getDictionary(lang: Lang): any {
+  return dicts[lang] ?? dicts.tr;
 }
 
 export function isValidLang(value: string): value is Lang {

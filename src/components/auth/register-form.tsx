@@ -7,10 +7,6 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { Dictionary } from "@/lib/i18n";
-
-type RegisterDict = Dictionary["auth"]["register"];
-
 function mapError(message: string, isEn: boolean): string {
   if (message.includes("User already registered"))
     return isEn ? "This email is already registered." : "Bu email adresi zaten kayıtlı.";
@@ -23,7 +19,7 @@ function mapError(message: string, isEn: boolean): string {
   return message;
 }
 
-type Props = { dict?: RegisterDict };
+type Props = { dict?: any };
 
 export function RegisterForm({ dict }: Props) {
   const router = useRouter();

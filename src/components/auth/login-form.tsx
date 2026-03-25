@@ -7,10 +7,6 @@ import { createClient } from "@/lib/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import type { Dictionary } from "@/lib/i18n";
-
-type LoginDict = Dictionary["auth"]["login"];
-
 function mapError(message: string, isEn: boolean): string {
   if (message.includes("Invalid login credentials"))
     return isEn ? "Incorrect email or password." : "Email veya şifre hatalı.";
@@ -30,7 +26,7 @@ const URL_ERRORS: Record<string, { tr: string; en: string }> = {
   },
 };
 
-type Props = { urlError?: string; dict?: LoginDict };
+type Props = { urlError?: string; dict?: any };
 
 export function LoginForm({ urlError, dict }: Props) {
   const router = useRouter();

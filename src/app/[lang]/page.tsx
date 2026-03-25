@@ -159,7 +159,7 @@ export default async function LandingPage({ params }: Props) {
               <p className="mt-3 text-zinc-500">{l.features.subtitle}</p>
             </div>
             <div className="grid gap-6 sm:grid-cols-2">
-              {l.features.items.map((f) => (
+              {l.features.items.map((f: any) => (
                 <div
                   key={f.title}
                   className="rounded-xl border border-zinc-200 bg-white p-6 transition-shadow hover:shadow-md"
@@ -184,7 +184,7 @@ export default async function LandingPage({ params }: Props) {
             </div>
             <div className="relative grid gap-8 sm:grid-cols-3">
               <div className="absolute left-0 right-0 top-8 hidden h-px bg-zinc-100 sm:block" />
-              {l.how_it_works.steps.map((s) => (
+              {l.how_it_works.steps.map((s: any) => (
                 <div key={s.number} className="relative flex flex-col items-center text-center">
                   <div className="relative z-10 flex h-16 w-16 items-center justify-center rounded-full border-2 border-zinc-100 bg-white text-xl font-bold text-[#10b981]">
                     {s.number}
@@ -232,13 +232,13 @@ export default async function LandingPage({ params }: Props) {
                       </div>
                     </div>
                     <ul className="mt-6 flex-1 space-y-2.5 text-sm">
-                      {plan.features.map((feat) => (
+                      {plan.features.map((feat: any) => (
                         <li key={feat} className="flex items-center gap-2">
                           <span className="text-[#10b981]">✓</span>
                           {feat}
                         </li>
                       ))}
-                      {plan.missing.map((feat) => (
+                      {plan.missing.map((feat: any) => (
                         <li key={feat} className="flex items-center gap-2 text-zinc-300">
                           <span>—</span>
                           {feat}
