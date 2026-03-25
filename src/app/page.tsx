@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/layout/footer";
+import { DemoButton } from "@/components/shared/demo-button";
 
 export const metadata: Metadata = {
   title: "WaitlistPro — Launch with a waitlist",
@@ -46,12 +47,7 @@ export default function HomePage() {
           >
             Start for free
           </Link>
-          <Link
-            href="/w/demo"
-            className="rounded-md border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800"
-          >
-            See demo
-          </Link>
+          <DemoButton />
         </div>
       </main>
 
