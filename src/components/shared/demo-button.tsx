@@ -23,7 +23,7 @@ export function DemoButton() {
     <button
       type="button"
       onClick={handleClick}
-      className="rounded-md border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-zinc-50 dark:hover:bg-zinc-800"
+      className="rounded-lg border border-zinc-200 px-6 py-3 text-sm font-semibold text-zinc-700 transition-colors hover:bg-zinc-50"
     >
       See demo
     </button>
