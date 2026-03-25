@@ -1,13 +1,18 @@
 import { z } from "zod";
 
 export const createWaitlistSchema = z.object({
-  name: z.string().min(2, "Min 2 characters").max(100),
+  name: z.string().min(2, "En az 2 karakter").max(100, "En fazla 100 karakter"),
   slug: z
     .string()
-    .min(3, "Min 3 characters")
-    .max(50)
-    .regex(/^[a-z0-9-]+$/, "Only lowercase letters, numbers, and hyphens"),
-  description: z.string().max(500).optional(),
+    .min(3, "En az 3 karakter")
+    .max(50, "En fazla 50 karakter")
+    .regex(/^[a-z0-9-]+$/, "Sadece küçük harf, rakam ve tire"),
+  description: z.string().max(500, "En fazla 500 karakter").optional(),
+  color: z
+    .string()
+    .regex(/^#[0-9a-fA-F]{6}$/, "Geçersiz renk kodu")
+    .optional()
+    .default("#10b981"),
 });
 
 export const updateWaitlistSchema = createWaitlistSchema.partial();

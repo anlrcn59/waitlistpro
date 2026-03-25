@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Footer } from "@/components/layout/footer";
+
+export const metadata: Metadata = {
+  title: "WaitlistPro — Launch with a waitlist",
+  description:
+    "Create beautiful waitlist pages in minutes. Grow your audience before you launch with referral-powered growth.",
+};
 
 export default function HomePage() {
   return (

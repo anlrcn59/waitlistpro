@@ -12,12 +12,34 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const siteUrl =
+  process.env["NEXT_PUBLIC_SITE_URL"] ?? "https://waitlistpro.com";
+const defaultDescription =
+  "Create beautiful waitlist pages and grow your audience before you launch.";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: "WaitlistPro",
+    default: "WaitlistPro — Launch with a waitlist",
     template: "%s | WaitlistPro",
   },
-  description: "Create beautiful waitlist pages and grow your audience before you launch.",
+  description: defaultDescription,
+  openGraph: {
+    type: "website",
+    siteName: "WaitlistPro",
+    title: "WaitlistPro — Launch with a waitlist",
+    description: defaultDescription,
+    url: siteUrl,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "WaitlistPro — Launch with a waitlist",
+    description: defaultDescription,
+  },
+  icons: {
+    icon: "/favicon.svg",
+    shortcut: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

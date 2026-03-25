@@ -33,7 +33,7 @@ export function WaitlistForm({
     setError("");
     setLoading(true);
     try {
-      await onSubmit?.({ name, slug, description: description || undefined });
+      await onSubmit?.({ name, slug, description: description || undefined, color: "#10b981" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {

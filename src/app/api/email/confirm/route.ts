@@ -1,5 +1,4 @@
-import { resend, FROM_EMAIL } from "@/lib/resend";
-import { WelcomeEmail } from "@/lib/resend/templates/welcome-email";
+import { sendConfirmationEmail } from "@/lib/resend";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
@@ -12,14 +11,14 @@ export async function POST(request: Request) {
         referralLink: string;
       };
 
-    const { error } = await resend.emails.send({
-      from: FROM_EMAIL,
+    const { error } = await sendConfirmationEmail({
       to: email,
-      subject: `You're on the ${waitlistName} waitlist!`,
-      react: WelcomeEmail({ waitlistName, position, referralLink }),
+      waitlistName,
+      position,
+      referralLink,
     });
 
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error) return NextResponse.json({ error }, { status: 500 });
     return NextResponse.json({ data: null });
   } catch (err) {
     console.error("[POST /api/email/confirm]", err);
