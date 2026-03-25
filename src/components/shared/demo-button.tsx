@@ -1,16 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import type { Lang } from "@/lib/i18n";
 
-type Props = {
-  label?: string;
-  lang?: Lang;
-};
+type Props = { label?: string };
 
-export function DemoButton({ label = "See demo", lang = "tr" }: Props) {
+export function DemoButton({ label = "See demo" }: Props) {
+  const pathname = usePathname();
   const router = useRouter();
+  const lang = pathname.startsWith("/en") ? "en" : "tr";
 
   async function handleClick() {
     const supabase = createClient();
@@ -18,11 +16,7 @@ export function DemoButton({ label = "See demo", lang = "tr" }: Props) {
       data: { user },
     } = await supabase.auth.getUser();
 
-    if (user) {
-      router.push(`/${lang}/dashboard`);
-    } else {
-      router.push(`/${lang}/login`);
-    }
+    router.push(user ? `/${lang}/dashboard` : `/${lang}/login`);
   }
 
   return (

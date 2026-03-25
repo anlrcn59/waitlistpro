@@ -1,6 +1,5 @@
 import { Header } from "@/components/layout/header";
 import { Sidebar } from "@/components/layout/sidebar";
-import type { Lang } from "@/lib/i18n";
 import { isValidLang } from "@/lib/i18n";
 import { notFound } from "next/navigation";
 
@@ -15,9 +14,9 @@ export default async function LangDashboardLayout({ children, params }: Props) {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <Sidebar lang={lang as Lang} />
+      <Sidebar />
       <div className="flex flex-1 flex-col overflow-hidden">
-        <Header lang={lang as Lang} />
+        <Header />
         <main className="flex-1 overflow-y-auto p-6">{children}</main>
       </div>
     </div>

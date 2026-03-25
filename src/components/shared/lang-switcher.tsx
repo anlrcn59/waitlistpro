@@ -2,16 +2,22 @@
 
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import type { Lang } from "@/lib/i18n";
-import { locales } from "@/lib/i18n";
 
-type Props = { currentLang: Lang };
+const LANGS = ["tr", "en"] as const;
+type Lang = (typeof LANGS)[number];
 
-export function LangSwitcher({ currentLang }: Props) {
+/**
+ * Self-contained lang switcher — reads current lang from URL, no props needed.
+ * Place it anywhere: <LangSwitcher />
+ */
+export function LangSwitcher() {
   const pathname = usePathname();
   const router = useRouter();
 
-  // Persist choice in localStorage
+  const segments = pathname.split("/");
+  const currentLang: Lang = segments[1] === "en" ? "en" : "tr";
+
+  // Persist selection in localStorage for client-side reads
   useEffect(() => {
     localStorage.setItem("lang", currentLang);
   }, [currentLang]);
@@ -19,33 +25,31 @@ export function LangSwitcher({ currentLang }: Props) {
   function switchTo(lang: Lang) {
     if (lang === currentLang) return;
 
-    // Swap /{currentLang}/... → /{lang}/...
-    const segments = pathname.split("/");
-    if (segments[1] && locales.includes(segments[1] as Lang)) {
-      segments[1] = lang;
+    const next = [...segments];
+    if (next[1] === "tr" || next[1] === "en") {
+      next[1] = lang;
     } else {
-      segments.splice(1, 0, lang);
+      next.splice(1, 0, lang);
     }
 
-    const newPath = segments.join("/") || "/";
     localStorage.setItem("lang", lang);
-    router.push(newPath);
+    router.push(next.join("/") || "/");
   }
 
   return (
-    <div className="flex items-center gap-0.5 rounded-md border border-zinc-200 bg-white p-0.5 text-xs font-medium">
-      {locales.map((locale) => (
+    <div className="flex overflow-hidden rounded-lg border border-zinc-200 text-sm font-semibold">
+      {LANGS.map((lang) => (
         <button
-          key={locale}
+          key={lang}
           type="button"
-          onClick={() => switchTo(locale)}
-          className={`rounded px-2 py-1 uppercase transition-colors ${
-            locale === currentLang
-              ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900"
-              : "text-zinc-500 hover:text-zinc-900 dark:hover:text-zinc-100"
+          onClick={() => switchTo(lang)}
+          className={`px-3 py-1.5 uppercase tracking-wide transition-colors ${
+            lang === currentLang
+              ? "bg-zinc-900 text-white"
+              : "bg-white text-zinc-400 hover:bg-zinc-50 hover:text-zinc-700"
           }`}
         >
-          {locale}
+          {lang}
         </button>
       ))}
     </div>

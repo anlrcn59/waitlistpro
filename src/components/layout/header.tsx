@@ -1,16 +1,16 @@
 "use client";
 
 import { useUser } from "@/hooks/use-user";
+import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
 import { LangSwitcher } from "@/components/shared/lang-switcher";
-import type { Lang } from "@/lib/i18n";
 
-type Props = { lang?: Lang };
-
-export function Header({ lang = "tr" }: Props) {
+export function Header() {
   const { user } = useUser();
+  const pathname = usePathname();
   const router = useRouter();
+
+  const lang = pathname.startsWith("/en") ? "en" : "tr";
 
   async function handleSignOut() {
     const supabase = createClient();
@@ -22,8 +22,8 @@ export function Header({ lang = "tr" }: Props) {
   return (
     <header className="flex h-14 items-center justify-between border-b px-6">
       <div />
-      <div className="flex items-center gap-3">
-        <LangSwitcher currentLang={lang} />
+      <div className="flex items-center gap-4">
+        <LangSwitcher />
         {user && (
           <>
             <span className="text-sm text-zinc-500">{user.email}</span>

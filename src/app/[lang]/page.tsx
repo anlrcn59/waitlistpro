@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getDictionary, isValidLang } from "@/lib/i18n";
-import type { Lang } from "@/lib/i18n";
 import { LangSwitcher } from "@/components/shared/lang-switcher";
 import { DemoButton } from "@/components/shared/demo-button";
 import { SHOPIER_PRO_URL } from "@/lib/plans";
@@ -115,7 +114,7 @@ export default async function LandingPage({ params }: Props) {
           <a href="#pricing" className="hidden text-sm text-zinc-500 hover:text-zinc-900 sm:block">
             {l.nav.pricing}
           </a>
-          <LangSwitcher currentLang={lang as Lang} />
+          <LangSwitcher />
           <Link href={`/${lang}/login`} className="text-sm text-zinc-500 hover:text-zinc-900">
             {l.nav.sign_in}
           </Link>
@@ -147,7 +146,7 @@ export default async function LandingPage({ params }: Props) {
             >
               {l.hero.cta_primary}
             </Link>
-            <DemoButton label={l.hero.cta_secondary} lang={lang as Lang} />
+            <DemoButton label={l.hero.cta_secondary} />
           </div>
           <MockScreenshot />
         </section>

@@ -3,12 +3,10 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import type { Lang } from "@/lib/i18n";
 
-type Props = { lang?: Lang };
-
-export function Sidebar({ lang = "tr" }: Props) {
+export function Sidebar() {
   const pathname = usePathname();
+  const lang = pathname.startsWith("/en") ? "en" : "tr";
   const base = `/${lang}`;
 
   const navItems = [
