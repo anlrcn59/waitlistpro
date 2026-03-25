@@ -57,7 +57,7 @@ export function PricingTable() {
 
         {/* Price */}
         <div className="mt-4">
-          <span className="text-4xl font-bold">₺299</span>
+          <span className="text-4xl font-bold">₺99</span>
           <span className="text-base font-normal text-muted-foreground">
             /ay
           </span>
